@@ -6,12 +6,14 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private float moveSpeed;
     [SerializeField] private float runSpeed;
+    [SerializeField] private float rollSpeed;
     
     private Rigidbody2D theRB;
 
 
     private float initialSpeed;
     private bool _isRunning;
+    private bool _isRolling;
     private Vector2 _direction;
 
     #region Getters and Setters
@@ -28,6 +30,12 @@ public class Player : MonoBehaviour
         set { _isRunning = value; }
     }
 
+    public bool IsRolling
+    {
+        get { return _isRolling; }
+        set { _isRolling = value; }
+    }
+
     #endregion
 
     // Start is called before the first frame update
@@ -42,6 +50,7 @@ public class Player : MonoBehaviour
     {
         OnInput();
         OnRun();
+        OnRolling();
     }
 
     private void FixedUpdate()
@@ -73,6 +82,21 @@ public class Player : MonoBehaviour
             _isRunning = false; 
         }
         
+    }
+
+    void OnRolling()
+    {
+        if(Input.GetMouseButtonDown(1))
+        {
+            moveSpeed = rollSpeed;
+            _isRolling = true;
+        }
+
+        if(Input.GetMouseButtonUp(1))
+        {
+            moveSpeed = initialSpeed;
+            _isRolling = false;
+        }
     }
     #endregion
 }
