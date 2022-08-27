@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     private bool _isRunning;
     private bool _isRolling;
     private Vector2 _direction;
+    
 
     #region Getters and Setters
     //Create a prop
